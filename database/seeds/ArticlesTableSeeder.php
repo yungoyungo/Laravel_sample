@@ -19,16 +19,7 @@ class ArticlesTableSeeder extends Seeder
         // Query Builder を使って、Articlesテーブルのレコードを全て削除
         DB::table('articles')->delete();
 
-        // Faker を使用してダミーデータを作成
-        $faker = Faker::create('en_US');
-
-        // 10件の Article データを作成
-        for($i=0; $i<10; $i++) {
-            Article::create([
-                'title' => $faker->sentence(),
-                'body' => $faker->paragraph(),
-                'published_at' => Carbon::today()
-            ]);
-        }
+        // factory() 関数に作成するモデルのクラス名と件数を指定して、DBにデータを作成
+        factory(App\Article::class, 20)->create();
     }
 }
