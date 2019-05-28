@@ -21,4 +21,22 @@ class ArticlesController extends Controller
 
         return view('articles.show', compact('article'));
     }
+
+    public function create()
+    {
+        return view('articles.create');
+    }
+
+    public function store()
+    {
+        // コントローラの名前空間でファサードクラスを使うには、グローバルクラスとして指定する必要がある
+        $inputs = \Request::all();
+
+        // デバッグ用
+        //dd($inputs);
+
+        Article::create($inputs);
+
+        return redirect('articles');
+    }
 }
