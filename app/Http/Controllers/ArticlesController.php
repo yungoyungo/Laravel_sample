@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Article;
 
+use App\Http\Requests\ArticleRequest;
+
 class ArticlesController extends Controller
 {
     //  Articles テーブルのデータ全てを抽出し、ビューに渡す
@@ -28,24 +30,25 @@ class ArticlesController extends Controller
     }
 
     // Illuminate\Http\Requestクラスのインスタンスを取得
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
-        $rules = [
+        // ここのvalidateは不要に
+        /* $rules = [
             'title' => 'required|min:3',
             'body'=> 'required',
             'published_at' => 'required|date',
         ];
         $validated = $this->validate($request, $rules);
+        Article::create($validated); */
 
         // コントローラの名前空間でファサードクラスを使うには、グローバルクラスとして指定する必要がある
         //$inputs = \Request::all();
         //Article::create($inputs);
 
-        Article::create($validated);
-
         // デバッグ用
         //dd($inputs);
 
+        Article::create($request->validated());
         return redirect('articles');
     }
 }
