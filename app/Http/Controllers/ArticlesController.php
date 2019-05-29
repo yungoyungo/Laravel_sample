@@ -3,16 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Article;
-
 use App\Http\Requests\ArticleRequest;
+use Carbon\Carbon;
 
 class ArticlesController extends Controller
 {
     //  Articles テーブルのデータ全てを抽出し、ビューに渡す
     public function index() {
-        $articles = Article::all();
+        //$articles = Article::all();
+
+        // ソート
+        $articles = Article::latest('published_at')->latest('created_at')
+            ->published()
+            ->get();
 
         return view('articles.index', compact('articles'));
     }
