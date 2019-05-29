@@ -27,15 +27,24 @@ class ArticlesController extends Controller
         return view('articles.create');
     }
 
-    public function store()
+    // Illuminate\Http\Requestクラスのインスタンスを取得
+    public function store(Request $request)
     {
+        $rules = [
+            'title' => 'required|min:3',
+            'body'=> 'required',
+            'published_at' => 'required|date',
+        ];
+        $validated = $this->validate($request, $rules);
+
         // コントローラの名前空間でファサードクラスを使うには、グローバルクラスとして指定する必要がある
-        $inputs = \Request::all();
+        //$inputs = \Request::all();
+        //Article::create($inputs);
+
+        Article::create($validated);
 
         // デバッグ用
         //dd($inputs);
-
-        Article::create($inputs);
 
         return redirect('articles');
     }
