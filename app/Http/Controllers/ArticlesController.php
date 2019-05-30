@@ -9,6 +9,12 @@ use Carbon\Carbon;
 
 class ArticlesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')
+            ->except(['index', 'show']);
+    }
+
     //  Articles テーブルのデータ全てを抽出し、ビューに渡す
     public function index() {
         //$articles = Article::all();

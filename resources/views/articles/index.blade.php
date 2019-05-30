@@ -3,7 +3,9 @@
 @section('content')
     <h1>
         Articles
-        <a href="articles/create" class="btn btn-primary float-right">新規作成</a>
+        @auth
+            <a href="{{ route('articles.create') }}" class="btn btn-primary float-right">新規作成</a>
+        @endauth
     </h1>
 
     <hr/>
