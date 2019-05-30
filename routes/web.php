@@ -15,7 +15,7 @@
     return view('welcome');
 }); */
 
-Route::get('/', 'WelcomeController@index')->name('home');
+//Route::get('/', 'WelcomeController@index')->name('home');
 Route::get('contact', 'PagesController@contact')->name('contact');
 Route::get('about', 'PagesController@about')->name('about');
 
@@ -28,7 +28,13 @@ Route::get('about', 'PagesController@about')->name('about');
 //Route::patch('articles/{id}', 'ArticlesController@update')->name('articles.update');
 //Route::delete('articles/{id}', 'ArticlesController@destroy')->name('articles.destroy');
 
+
+Route::get('/', 'ArticlesController@index')->name('home');
 Route::resource('articles', 'ArticlesController');
 
 //php artisan make:controller PostsController --resource すれば一発でルーティングできる
 //Route::resource('posts', 'PostsController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
