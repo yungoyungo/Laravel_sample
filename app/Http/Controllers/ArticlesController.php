@@ -30,9 +30,7 @@ class ArticlesController extends Controller
     }
 
     // とりあえず引数で受け取った $id を表示するのみ
-    public function show($id) {
-        $article = Article::findOrFail($id);
-
+    public function show(Article $article) {
         return view('articles.show', compact('article'));
     }
 
@@ -68,23 +66,17 @@ class ArticlesController extends Controller
         return redirect()->route('articles.index')->with('message', '記事を追加しました。');
     }
 
-    public function edit($id) {
-        $article = Article::findOrFail($id);
-
+    public function edit(Article $article) {
         return view('articles.edit', compact('article'));
     }
 
-    public function update(ArticleRequest $request, $id) {
-        $article = Article::findOrFail($id);
-
+    public function update(ArticleRequest $request, Article $article) {
         $article->update($request->validated());
 
         return redirect()->route('articles.show', [$article->id])->with('message', '記事を修正しました。');
     }
 
-    public function destroy($id) {
-        $article = Article::findOrFail($id);
- 
+    public function destroy(Article $article) {
         $article->delete();
  
         return redirect()->route('articles.index')->with('message', '記事を削除しました。');
