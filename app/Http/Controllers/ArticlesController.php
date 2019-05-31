@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Article;
 use App\Http\Requests\ArticleRequest;
 use Carbon\Carbon;
+
 
 class ArticlesController extends Controller
 {
@@ -58,7 +60,10 @@ class ArticlesController extends Controller
         // デバッグ用
         //dd($inputs);
 
-        Article::create($request->validated());
+        //Article::create($request->validated());
+
+        // ユーザーごとの記事として保存
+        Auth::user()->articles()->create($request->validated());
 
         return redirect()->route('articles.index')->with('message', '記事を追加しました。');
     }
