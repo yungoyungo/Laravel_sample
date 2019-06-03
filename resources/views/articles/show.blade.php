@@ -19,6 +19,15 @@
             @endforeach
         </ul>
     @endunless
+
+    @unless($article->comments->isEmpty())
+        <h5>Comments:</h5>
+        <ul>
+            @foreach($article->comments as $comment)
+                <li>{{ $comment->body }}</li>
+            @endforeach
+        </ul>
+    @endunless
  
     <br/>
  
