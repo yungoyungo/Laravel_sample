@@ -40,6 +40,6 @@ class Article extends Model
 
     public function comments()
     {
-        return $this->belongToMany('App\Comment'); //->withTimestamps();
+        return $this->belongsToMany('App\Comment')->withTimestamps();
     }
 }

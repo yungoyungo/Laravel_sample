@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             ArticlesTableSeeder::class, // ArticlesTableSeeder の呼び出し
+            CommentsTableSeeder::class,
             // OtherTableSeeder::class, // 複数の Seeder を呼び出したい場合はここに追加
         ]);
         // $this->call(UsersTableSeeder::class);
